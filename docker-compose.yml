@@ -1,0 +1,27 @@
+version: '3.4'
+
+services:
+  messagedb:
+    image: mongo
+
+  rabbitmq:
+    image: rabbitmq:3-management-alpine
+
+  messaging.idendity.api:
+    image: ${DOCKER_REGISTRY-}messagingidendityapi
+    build:
+      context: .
+      dockerfile: src/Messaging.Idendity.Api/Dockerfile
+
+  messaging.user.api:
+    image: ${DOCKER_REGISTRY-}messaginguserapi
+    build:
+      context: .
+      dockerfile: src/Messaging.User.Api/Dockerfile
+
+  messaging.user.service:
+    image: ${DOCKER_REGISTRY-}messaginguserservice
+    build:
+      context: .
+      dockerfile: src/Messaging.User.Services/Dockerfile
+

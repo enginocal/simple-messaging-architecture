@@ -1,0 +1,70 @@
+version: '3.4'
+
+services:
+
+  rabbitmq:
+    container_name: rabbitmq
+    restart: on-failure
+    hostname: rabbit
+    ports:
+    - "4369:4369"
+    - "5671:5671"
+    - "5672:5672"
+    - "25672:25672"
+    - "15671:15671"
+    - "15672:15672"
+    healthcheck:
+        test: ["CMD", "curl", "-f", "http://localhost:15672"]
+        interval: 30s
+        timeout: 10s
+        retries: 5
+
+  messagedb:
+    container_name: messagedb
+    restart: on-failure
+    ports:
+        - "27017:27017"
+    volumes:
+        - mongo_data:/data/db
+
+
+  messaging.idendity.api:
+    container_name: idendity.api
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+    depends_on:
+        - messagedb
+        - rabbitmq
+    links:
+        - rabbitmq
+    ports:
+      - "8005:80"
+
+  messaging.user.api:
+    container_name: user.api
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+    depends_on:
+      - messagedb
+      - rabbitmq
+    ports:
+      - "8006:80"
+  
+  messaging.user.service:
+   container_name: user.service
+   environment:
+     - ASPNETCORE_ENVIRONMENT=Development
+   depends_on:
+     - messagedb
+     - rabbitmq
+   ports:
+    - "8007:80"
+
+
+
+
+
+  
+
+volumes:
+  mongo_data:
