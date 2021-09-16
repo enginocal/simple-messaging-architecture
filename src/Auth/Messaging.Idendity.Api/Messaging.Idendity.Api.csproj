@@ -2,7 +2,7 @@
 
   <PropertyGroup>
     <TargetFramework>net5.0</TargetFramework>
-    <UserSecretsId>83a33cf5-e04d-4351-bf2d-649583cc2a2d</UserSecretsId>
+    <UserSecretsId>59f5c364-b498-449d-98f0-1baa94b8e1cf</UserSecretsId>
     <DockerDefaultTargetOS>Linux</DockerDefaultTargetOS>
     <DockerfileContext>..\..</DockerfileContext>
     <DockerComposeProjectPath>..\..\docker-compose.dcproj</DockerComposeProjectPath>
@@ -14,7 +14,13 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Messaging.Shared.Common\Messaging.Shared.Common.csproj" />
-    <ProjectReference Include="..\Messaging.User.Domain\Messaging.Users.Domain.csproj" />
+    <ProjectReference Include="..\..\Shared\Messaging.User.Domain\Messaging.Users.Domain.csproj" />
   </ItemGroup>
+
+  <ItemGroup>
+    <Content Update="appsettings.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+
 </Project>

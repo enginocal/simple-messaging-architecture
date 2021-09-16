@@ -5,7 +5,7 @@ using MongoDB.Driver.Linq;
 using Messaging.Users.Domain.Repositories;
 using Messaging.Users.Domain.Models;
 
-namespace essaging.Users.Domain.Repositories
+namespace Messaging.Users.Domain.Repositories
 {
     public class UserRepository : IUserRepository
     {

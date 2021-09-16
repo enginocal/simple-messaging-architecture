@@ -1,4 +1,4 @@
-using essaging.Users.Domain.Repositories;
+using Messaging.Users.Domain.Repositories;
 using Messaging.Common.Auth;
 using Messaging.Common.Commands;
 using Messaging.Common.Mongo;
