@@ -1,5 +1,6 @@
 using Messaging.Common.Commands;
 using Messaging.Common.Services;
+using Messaging.Shared.Common.Commands;
 
 namespace Messaging.Services.Users
 {
@@ -10,6 +11,7 @@ namespace Messaging.Services.Users
             ServiceHost.Create<Startup>(args)
                 .UseRabbitMq()
                 .SubscribeToCommand<CreateUser>()
+                .SubscribeToCommand<BlockUser>()
                 .Build()
                 .Run();
         }

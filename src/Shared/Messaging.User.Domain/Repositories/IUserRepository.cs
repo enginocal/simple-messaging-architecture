@@ -11,5 +11,6 @@ namespace Messaging.Users.Domain.Repositories
         Task<User> GetAsync(string email);
         Task<User> GetByUserNameAsync(string userName);
         Task AddAsync(User user);
+        Task BlockUser(Guid userId, BlockedUser blockUser);
     }
 }

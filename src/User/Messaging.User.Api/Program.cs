@@ -10,8 +10,6 @@ namespace Messaging.User.Api
         {
             ServiceHost.Create<Startup>(args)
                  .UseRabbitMq()
-                 //.SubscribeToEvent<PushMessageCreated>()
-                 //.SubscribeToEvent<CreateActivityRejected>()
                  .Build()
                  .Run();
         }

@@ -1,5 +1,7 @@
+using Messaging.Common.Auth;
 using Messaging.Common.Mongo;
 using Messaging.Common.RabbitMq;
+using Messaging.Users.Domain.Repositories;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
@@ -23,8 +25,10 @@ namespace Messaging.User.Api
         {
 
             services.AddControllers();
+            services.AddJwt(Configuration);
             services.AddRabbitMq(Configuration);
             services.AddMongoDB(Configuration);
+            services.AddScoped<IUserRepository, UserRepository>();
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "Messaging.User.Api", Version = "v1" });

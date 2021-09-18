@@ -4,7 +4,7 @@
     <TargetFramework>net5.0</TargetFramework>
     <UserSecretsId>83a33cf5-e04d-4351-bf2d-649583cc2a2d</UserSecretsId>
     <DockerDefaultTargetOS>Linux</DockerDefaultTargetOS>
-    <DockerfileContext>..\..</DockerfileContext>
+    <DockerfileContext>..\..\..</DockerfileContext>
     <DockerComposeProjectPath>..\..\docker-compose.dcproj</DockerComposeProjectPath>
   </PropertyGroup>
 
@@ -16,5 +16,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\..\Shared\Messaging.Shared.Common\Messaging.Shared.Common.csproj" />
+    <ProjectReference Include="..\..\Shared\Messaging.User.Domain\Messaging.User.Domain.csproj" />
+    <ProjectReference Include="..\Messaging.User.Application\Messaging.User.Application.csproj" />
   </ItemGroup>
 </Project>

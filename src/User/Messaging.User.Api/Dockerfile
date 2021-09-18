@@ -7,11 +7,12 @@ EXPOSE 443
 
 FROM mcr.microsoft.com/dotnet/sdk:5.0 AS build
 WORKDIR /src
-COPY ["src/Messaging.User.Api/Messaging.User.Api.csproj", "src/Messaging.User.Api/"]
-COPY ["src/Messaging.Shared.Common/Messaging.Shared.Common.csproj", "src/Messaging.Shared.Common/"]
-RUN dotnet restore "src/Messaging.User.Api/Messaging.User.Api.csproj"
+COPY ["src/User/Messaging.User.Api/Messaging.User.Api.csproj", "src/User/Messaging.User.Api/"]
+COPY ["src/Shared/Messaging.User.Domain/Messaging.User.Domain.csproj", "src/Shared/Messaging.User.Domain/"]
+COPY ["src/Shared/Messaging.Shared.Common/Messaging.Shared.Common.csproj", "src/Shared/Messaging.Shared.Common/"]
+RUN dotnet restore "src/User/Messaging.User.Api/Messaging.User.Api.csproj"
 COPY . .
-WORKDIR "/src/src/Messaging.User.Api"
+WORKDIR "/src/src/User/Messaging.User.Api"
 RUN dotnet build "Messaging.User.Api.csproj" -c Release -o /app/build
 
 FROM build AS publish

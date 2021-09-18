@@ -58,13 +58,21 @@ services:
      - messagedb
      - rabbitmq
    ports:
-    - "8007:80"
+    - "8007:80"  
 
-
-
-
-
-  
+  messaging.chat.api:
+    container_name: chat.api
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+    ports:
+      - "8008:80" 
+  messaging.chat.services:
+    container_name: chat.services
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+    ports:
+      - "8009:80" 
 
 volumes:
   mongo_data:
+

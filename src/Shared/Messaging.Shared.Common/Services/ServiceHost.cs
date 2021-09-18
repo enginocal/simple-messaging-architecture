@@ -31,7 +31,9 @@ namespace Messaging.Common.Services
                 .Build();
             var webHostBuilder = WebHost.CreateDefaultBuilder(args)
                 .UseConfiguration(config)
-                .UseStartup<TStartup>();
+                .UseStartup<TStartup>()
+                .UseDefaultServiceProvider(options =>
+                    options.ValidateScopes = false);
 
             return new HostBuilder(webHostBuilder.Build());
         }
@@ -67,7 +69,7 @@ namespace Messaging.Common.Services
         public class BusBuilder : BuilderBase
         {
             private readonly IWebHost _webHost;
-            private IBusClient _bus; 
+            private readonly IBusClient _bus; 
 
             public BusBuilder(IWebHost webHost, IBusClient bus)
             {

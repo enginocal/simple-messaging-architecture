@@ -1,0 +1,23 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>net5.0</TargetFramework>
+    <UserSecretsId>5ed5a685-a919-4218-8f29-e3adf9e2189f</UserSecretsId>
+    <DockerDefaultTargetOS>Linux</DockerDefaultTargetOS>
+    <DockerfileContext>..\..\..</DockerfileContext>
+    <DockerComposeProjectPath>..\..\..\docker-compose.dcproj</DockerComposeProjectPath>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.VisualStudio.Azure.Containers.Tools.Targets" Version="1.11.1" />
+    <PackageReference Include="Swashbuckle.AspNetCore" Version="5.6.3" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\Shared\Messaging.Shared.Common\Messaging.Shared.Common.csproj" />
+    <ProjectReference Include="..\..\Shared\Messaging.User.Domain\Messaging.User.Domain.csproj" />
+    <ProjectReference Include="..\Messaging.Chat.Application\Messaging.Chat.Application.csproj" />
+    <ProjectReference Include="..\Messaging.Chat.Domain\Messaging.Chat.Domain.csproj" />
+  </ItemGroup>
+
+</Project>

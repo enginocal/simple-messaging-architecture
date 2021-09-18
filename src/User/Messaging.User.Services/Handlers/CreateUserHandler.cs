@@ -29,12 +29,12 @@ namespace Messaging.User.Services.Handlers
             _logger.LogInformation($"Creating user: '{command.Email}' with name: '{command.Name}'.");
             try
             {
-                await _userService.RegisterAsync(command.Email, command.Password, command.Name);
-                await _busClient.PublishAsync(new UserCreated(command.Email, command.Name));
+                await _userService.RegisterAsync(command.Email, command.Password, command.Name, command.UserName);
+                await _busClient.PublishAsync(new UserCreated(command.Email, command.Name, command.UserName));
                 _logger.LogInformation($"User: '{command.Email}' was created with name: '{command.Name}'.");
                 return;
             }
-            catch (MessagingException ex)
+            catch (HomeRunException ex)
             {
                 _logger.LogError(ex, ex.Message);
                 await _busClient.PublishAsync(new CreateUserRejected(command.Email, ex.Message, ex.Code));

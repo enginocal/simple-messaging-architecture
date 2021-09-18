@@ -7,11 +7,12 @@ EXPOSE 443
 
 FROM mcr.microsoft.com/dotnet/sdk:5.0 AS build
 WORKDIR /src
-COPY ["src/Messaging.Idendity.Api/Messaging.Idendity.Api.csproj", "src/Messaging.Idendity.Api/"]
-COPY ["src/Messaging.Shared.Common/Messaging.Shared.Common.csproj", "src/Messaging.Shared.Common/"]
-RUN dotnet restore "src/Messaging.Idendity.Api/Messaging.Idendity.Api.csproj"
+COPY ["src/Auth/Messaging.Idendity.Api/Messaging.Idendity.Api.csproj", "src/Auth/Messaging.Idendity.Api/"]
+COPY ["src/Shared/Messaging.User.Domain/Messaging.User.Domain.csproj", "src/Shared/Messaging.User.Domain/"]
+COPY ["src/Shared/Messaging.Shared.Common/Messaging.Shared.Common.csproj", "src/Shared/Messaging.Shared.Common/"]
+RUN dotnet restore "src/Auth/Messaging.Idendity.Api/Messaging.Idendity.Api.csproj"
 COPY . .
-WORKDIR "/src/src/Messaging.Idendity.Api"
+WORKDIR "/src/src/Auth/Messaging.Idendity.Api"
 RUN dotnet build "Messaging.Idendity.Api.csproj" -c Release -o /app/build
 
 FROM build AS publish

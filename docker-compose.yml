@@ -11,17 +11,31 @@ services:
     image: ${DOCKER_REGISTRY-}messagingidendityapi
     build:
       context: .
-      dockerfile: src/Messaging.Idendity.Api/Dockerfile
+      dockerfile: src/Auth/Messaging.Idendity.Api/Dockerfile
 
   messaging.user.api:
     image: ${DOCKER_REGISTRY-}messaginguserapi
     build:
       context: .
-      dockerfile: src/Messaging.User.Api/Dockerfile
+      dockerfile: src/User/Messaging.User.Api/Dockerfile
 
   messaging.user.service:
     image: ${DOCKER_REGISTRY-}messaginguserservice
     build:
       context: .
-      dockerfile: src/Messaging.User.Services/Dockerfile
+      dockerfile: src/User/Messaging.User.Services/Dockerfile
+
+
+  messaging.chat.api:
+    image: ${DOCKER_REGISTRY-}messagingchatapi
+    build:
+      context: .
+      dockerfile: src/Chat/Messaging.Chat.Api/Dockerfile
+
+
+  messaging.chat.services:
+    image: ${DOCKER_REGISTRY-}messagingchatservices
+    build:
+      context: .
+      dockerfile: src/Chat/Messaging.Chat.Services/Dockerfile
 

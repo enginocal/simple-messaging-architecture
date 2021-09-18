@@ -1,17 +1,17 @@
 using Messaging.Users.Domain.Repositories;
-using Messaging.Common.Auth;
 using Messaging.Common.Commands;
 using Messaging.Common.Mongo;
 using Messaging.Common.RabbitMq;
 using Messaging.Services.Identity.Domain.Services;
 using Messaging.User.Services.Handlers;
-using Messaging.Users.Domain.Repositories;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.OpenApi.Models;
+using Messaging.User.Services;
+using Messaging.Shared.Common.Commands;
 
 namespace Messaging.Services.Users
 {
@@ -30,11 +30,12 @@ namespace Messaging.Services.Users
 
             services.AddControllers();
             services.AddLogging();
-            services.AddJwt(Configuration);
             services.AddMongoDB(Configuration);
+            services.AddScoped<IUserRepository, UserRepository>();
             services.AddRabbitMq(Configuration);
             services.AddScoped<ICommandHandler<CreateUser>, CreateUserHandler>();
-            services.AddScoped<IUserRepository, UserRepository>();
+            services.AddScoped<ICommandHandler<BlockUser>, BlockUserHandler>();
+            services.AddScoped<IUserService, UserService>();
             services.AddSingleton<IEncrypter, Encrypter>();
             services.AddSwaggerGen(c =>
             {

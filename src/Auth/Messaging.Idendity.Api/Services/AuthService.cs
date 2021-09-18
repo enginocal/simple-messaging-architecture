@@ -26,11 +26,11 @@ namespace Messaging.Services.Identity.Services
             var user = await _repository.GetAsync(email);
             if (user == null)
             {
-                throw new MessagingException("invalid_credentials", $"Invalid credentials.");
+                throw new HomeRunException("invalid_credentials", $"Invalid credentials.");
             }
             if (!user.ValidatePassword(password, _encrypter))
             {
-                throw new MessagingException("invalid_credentials", $"Invalid credentials.");
+                throw new HomeRunException("invalid_credentials", $"Invalid credentials.");
             }
 
             return _jwtHandler.Create(user.Id);

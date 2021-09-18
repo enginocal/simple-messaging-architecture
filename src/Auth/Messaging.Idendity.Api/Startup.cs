@@ -1,5 +1,4 @@
 using Messaging.Common.Auth;
-using Messaging.Common.Commands;
 using Messaging.Common.Mongo;
 using Messaging.Common.RabbitMq;
 using Messaging.Services.Identity.Domain.Services;
@@ -54,7 +53,9 @@ namespace Messaging.Idendity.Api
 
             app.UseRouting();
 
-            app.UseAuthorization();
+            app.UseAuthentication();
+
+            //app.ApplicationServices.GetService<IDatabaseInitializer>().InitializeAsync();
 
             app.UseEndpoints(endpoints =>
             {

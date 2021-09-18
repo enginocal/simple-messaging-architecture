@@ -11,16 +11,16 @@ namespace Messaging.Idendity.Api.Controllers
     [ApiController]
     public class AccountController : ControllerBase
     {
-        private readonly ICustomAuthService _userService;
+        private readonly ICustomAuthService _authService;
 
         public AccountController(ICustomAuthService userService)
         {
-            _userService = userService;
+            _authService = userService;
         }
 
         [HttpPost("login")]
         public async Task<IActionResult> Login([FromBody] AuthenticateUser command)
-            => (IActionResult)await _userService.LoginAsync(command.Email, command.Password);
+            => Ok(await _authService.LoginAsync(command.Email, command.Password));
 
     }
 }
