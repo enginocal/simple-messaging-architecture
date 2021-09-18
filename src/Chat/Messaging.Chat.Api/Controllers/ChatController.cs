@@ -1,6 +1,8 @@
 ﻿using Messaging.Chat.Api.Models;
 using Messaging.Chat.Api.Services;
 using Messaging.Chat.Application.Commands;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using RawRabbit;
 using System;
@@ -10,6 +12,7 @@ namespace Messaging.Chat.Api.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+    [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
     public class ChatController : ControllerBase
     {
         private readonly IBusClient _busClient;
@@ -52,7 +55,5 @@ namespace Messaging.Chat.Api.Controllers
             var conversations = await _chatService.GetUserConservations(conversationId);
             return Ok(conversations);
         }
-
-
     }
 }
